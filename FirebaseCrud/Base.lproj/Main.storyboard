@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,105 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FirebaseCrud" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BAS-bY-wyY">
+                                <rect key="frame" x="89" y="47" width="196" height="29"/>
+                                <segments>
+                                    <segment title="Iniciar Sesion"/>
+                                    <segment title="Registrar"/>
+                                </segments>
+                            </segmentedControl>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Correo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dn6-7u-iGg">
+                                <rect key="frame" x="16" y="118" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Tu-D2-Ato">
+                                <rect key="frame" x="16" y="162" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cha-Od-VGt">
+                                <rect key="frame" x="113" y="253" width="149" height="30"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.0" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Entrar / Registrar">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="entrar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Ck-Vx-XOU"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Cha-Od-VGt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="113" id="BvC-qs-xaW"/>
+                            <constraint firstItem="BAS-bY-wyY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="89" id="HD3-Y8-POl"/>
+                            <constraint firstItem="2Tu-D2-Ato" firstAttribute="top" secondItem="Dn6-7u-iGg" secondAttribute="bottom" constant="14" id="Qqk-5j-e5z"/>
+                            <constraint firstItem="Dn6-7u-iGg" firstAttribute="top" secondItem="BAS-bY-wyY" secondAttribute="bottom" constant="43" id="UmG-ZW-IjX"/>
+                            <constraint firstItem="Dn6-7u-iGg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Vip-bs-azv"/>
+                            <constraint firstItem="BAS-bY-wyY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="27" id="WHI-XR-qRL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dn6-7u-iGg" secondAttribute="trailing" constant="16" id="Xa6-Iz-S8M"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BAS-bY-wyY" secondAttribute="trailing" constant="90" id="XfR-Uq-fs7"/>
+                            <constraint firstItem="2Tu-D2-Ato" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Z0d-e9-BUe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Cha-Od-VGt" secondAttribute="trailing" constant="113" id="atM-lv-sIa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Cha-Od-VGt" secondAttribute="bottom" constant="384" id="ibD-Kt-ldP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Tu-D2-Ato" secondAttribute="trailing" constant="16" id="j60-lU-2WP"/>
+                            <constraint firstItem="Cha-Od-VGt" firstAttribute="top" secondItem="2Tu-D2-Ato" secondAttribute="bottom" constant="61" id="r1q-YX-tDT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="control" destination="BAS-bY-wyY" id="JKe-PW-D0K"/>
+                        <outlet property="correo" destination="Dn6-7u-iGg" id="5uU-eK-aTP"/>
+                        <outlet property="password" destination="2Tu-D2-Ato" id="LLM-xg-4HJ"/>
+                        <segue destination="hhr-vk-50q" kind="show" identifier="inicio" id="aMV-ZR-fMg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-258" y="134"/>
+        </scene>
+        <!--Inicio View Controller-->
+        <scene sceneID="Ceh-64-mpC">
+            <objects>
+                <viewController id="hhr-vk-50q" customClass="InicioViewController" customModule="FirebaseCrud" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IIV-QV-dAz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nr8-ba-U5s">
+                                <rect key="frame" x="90" y="318" width="195" height="30"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.0" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Salir">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="salir:" destination="hhr-vk-50q" eventType="touchUpInside" id="lF0-hA-Y4t"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ESE-nS-0CP" firstAttribute="trailing" secondItem="Nr8-ba-U5s" secondAttribute="trailing" constant="90" id="9Vj-sb-xP5"/>
+                            <constraint firstItem="Nr8-ba-U5s" firstAttribute="leading" secondItem="ESE-nS-0CP" secondAttribute="leading" constant="90" id="H0C-fS-oDy"/>
+                            <constraint firstItem="ESE-nS-0CP" firstAttribute="bottom" secondItem="Nr8-ba-U5s" secondAttribute="bottom" constant="319" id="tdo-pm-bP3"/>
+                            <constraint firstItem="Nr8-ba-U5s" firstAttribute="top" secondItem="ESE-nS-0CP" secondAttribute="top" constant="298" id="xKA-AV-GOm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ESE-nS-0CP"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="login" id="oFR-Rq-w9c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wXx-po-Kt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="503.19999999999999" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>
