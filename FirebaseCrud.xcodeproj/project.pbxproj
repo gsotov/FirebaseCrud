@@ -14,6 +14,7 @@
 		D7887F2221ECE79D009A6356 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7887F2021ECE79D009A6356 /* LaunchScreen.storyboard */; };
 		D7887F2A21ECE8CB009A6356 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7887F2921ECE8CB009A6356 /* GoogleService-Info.plist */; };
 		D7BD830521ED086E0044B6ED /* InicioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BD830421ED086E0044B6ED /* InicioViewController.swift */; };
+		D7BD830721ED34020044B6ED /* VistaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BD830621ED34020044B6ED /* VistaViewController.swift */; };
 		EA38F87C2313468A5E79150E /* Pods_FirebaseCrud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 065D399F1BE4558679E1DA7D /* Pods_FirebaseCrud.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		D7887F2321ECE79D009A6356 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7887F2921ECE8CB009A6356 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D7BD830421ED086E0044B6ED /* InicioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicioViewController.swift; sourceTree = "<group>"; };
+		D7BD830621ED34020044B6ED /* VistaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VistaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				D7887F1721ECE79C009A6356 /* AppDelegate.swift */,
 				D7887F1921ECE79C009A6356 /* ViewController.swift */,
 				D7BD830421ED086E0044B6ED /* InicioViewController.swift */,
+				D7BD830621ED34020044B6ED /* VistaViewController.swift */,
 				D7887F1B21ECE79C009A6356 /* Main.storyboard */,
 				D7887F1E21ECE79D009A6356 /* Assets.xcassets */,
 				D7887F2021ECE79D009A6356 /* LaunchScreen.storyboard */,
@@ -223,6 +226,7 @@
 			files = (
 				D7887F1A21ECE79C009A6356 /* ViewController.swift in Sources */,
 				D7BD830521ED086E0044B6ED /* InicioViewController.swift in Sources */,
+				D7BD830721ED34020044B6ED /* VistaViewController.swift in Sources */,
 				D7887F1821ECE79C009A6356 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

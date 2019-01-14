@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        login()
     }
 
     @IBAction func entrar(_ sender: UIButton)
@@ -62,6 +63,21 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+    func login()
+    {
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            
+            if user == nil
+            {
+                print("no esta logeado")
+            }
+            else
+            {
+                self.performSegue(withIdentifier: "inicio", sender: self)
+            }
+        }
     }
     
 }
