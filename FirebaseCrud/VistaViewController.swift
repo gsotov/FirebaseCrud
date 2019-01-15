@@ -18,6 +18,7 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var listaJuegos = [Juegos]()
     var ref: DatabaseReference!
     var handle: DatabaseHandle!
+    var consola = ""
     
     override func viewDidLoad()
     {
@@ -63,16 +64,47 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 let nombre = valores["nombre"] as? String
                 let genero = valores["genero"] as? String
+                let id = valores["id"] as? String
                 
-                let juegos = Juegos(nombre: nombre, genero: genero)
+                
+                let juegos = Juegos(nombre: nombre, genero: genero, id: id)
                 self.listaJuegos.append(juegos)
                 
             }
             self.tabla.reloadData()
         })
+        consola = "PLAYSTATION 4"
     
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        performSegue(withIdentifier: "editar", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editar"{
+            if let id = tabla.indexPathForSelectedRow{
+                let fila = listaJuegos[id.row]
+                let destino = segue.destination as! EditarViewController
+                
+                destino.editarJuegos = fila
+                destino.plataforma = consola
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let borrar = UITableViewRowAction(style: .destructive, title: "Eliminar") { (action, indexPath) in
+            let juego: Juegos
+            juego = self.listaJuegos[indexPath.row]
+            let id = juego.id
+            
+            self.ref.child(self.consola).child(id!).setValue(nil)
+        }
+        return [borrar]
+    }
+    
     @IBAction func atras(_ sender: UIBarButtonItem)
     {
         dismiss(animated: true, completion: nil)
@@ -82,12 +114,16 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     {
         if control.selectedSegmentIndex == 0{
             plataformas(plat: "PLAYSTATION 4")
+            consola = "PLAYSTATION 4"
         }else if control.selectedSegmentIndex == 1{
             plataformas(plat: "XBOX ONE")
+            consola = "XBOX ONE"
         }else if control.selectedSegmentIndex == 2{
             plataformas(plat: "NINTENDO SWITCH")
+            consola = "NINTENDO SWITCH"
         }else {
             plataformas(plat: "PC")
+            consola = "PC"
         }
 
     }
