@@ -155,18 +155,30 @@
                                 <color key="barTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <navigationItem title="Guardar Juego" id="dff-jL-FeA">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="txK-TR-1sF">
-                                            <color key="tintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <connections>
-                                                <segue destination="40N-Ou-DnJ" kind="show" id="Pyg-aV-ruD"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="bookmarks" id="txK-TR-1sF">
+                                                <color key="tintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <segue destination="40N-Ou-DnJ" kind="show" id="Pyg-aV-ruD"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="camera" id="E8R-Ro-p06">
+                                                <color key="tintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <connections>
+                                                    <action selector="tomarFoto:" destination="hhr-vk-50q" id="LUx-Ay-Q3n"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="jNE-cV-ujq">
+                                <rect key="frame" x="177" y="252" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ESE-nS-0CP" firstAttribute="trailing" secondItem="jNE-cV-ujq" secondAttribute="trailing" constant="178" id="0vL-DB-uMm"/>
                             <constraint firstItem="C0Z-hb-SK6" firstAttribute="top" secondItem="SqI-JQ-DD0" secondAttribute="bottom" constant="27" id="38L-ff-2RY"/>
                             <constraint firstItem="ESE-nS-0CP" firstAttribute="trailing" secondItem="Nq2-fb-Vcg" secondAttribute="trailing" constant="16" id="4PF-CH-bjo"/>
                             <constraint firstItem="ESE-nS-0CP" firstAttribute="trailing" secondItem="C0Z-hb-SK6" secondAttribute="trailing" constant="16" id="4ho-aB-vUX"/>
@@ -178,6 +190,7 @@
                             <constraint firstItem="ESE-nS-0CP" firstAttribute="bottom" secondItem="Nr8-ba-U5s" secondAttribute="bottom" constant="20" id="Jjd-sL-jxB"/>
                             <constraint firstItem="ESE-nS-0CP" firstAttribute="trailing" secondItem="Nr8-ba-U5s" secondAttribute="trailing" constant="90" id="L50-dS-N5D"/>
                             <constraint firstItem="Nq2-fb-Vcg" firstAttribute="leading" secondItem="ESE-nS-0CP" secondAttribute="leading" constant="16" id="N4H-BG-K9X"/>
+                            <constraint firstItem="jNE-cV-ujq" firstAttribute="top" secondItem="C0Z-hb-SK6" secondAttribute="bottom" constant="31" id="QcW-EK-cHh"/>
                             <constraint firstItem="fYH-qo-v97" firstAttribute="leading" secondItem="ESE-nS-0CP" secondAttribute="leading" id="RWS-5y-26N"/>
                             <constraint firstItem="Nq2-fb-Vcg" firstAttribute="top" secondItem="fYH-qo-v97" secondAttribute="bottom" constant="41" id="Sfd-We-asd"/>
                             <constraint firstItem="Nq2-fb-Vcg" firstAttribute="top" secondItem="ESE-nS-0CP" secondAttribute="top" constant="85" id="ZDD-yJ-GTj"/>
@@ -186,14 +199,17 @@
                             <constraint firstItem="jFW-bA-TCX" firstAttribute="leading" secondItem="ESE-nS-0CP" secondAttribute="leading" constant="90" id="f4t-4q-Hwl"/>
                             <constraint firstItem="XbB-oD-KnU" firstAttribute="top" secondItem="C0Z-hb-SK6" secondAttribute="bottom" constant="31" id="gED-j0-BCQ"/>
                             <constraint firstItem="ESE-nS-0CP" firstAttribute="trailing" secondItem="XbB-oD-KnU" secondAttribute="trailing" constant="1" id="o2Y-Kg-2Tx"/>
+                            <constraint firstItem="jNE-cV-ujq" firstAttribute="leading" secondItem="ESE-nS-0CP" secondAttribute="leading" constant="177" id="r5g-Bn-Kh3"/>
                             <constraint firstItem="ESE-nS-0CP" firstAttribute="trailing" secondItem="SqI-JQ-DD0" secondAttribute="trailing" constant="16" id="t9L-yC-Goi"/>
                             <constraint firstItem="fYH-qo-v97" firstAttribute="top" secondItem="ESE-nS-0CP" secondAttribute="top" id="tBv-1O-guX"/>
+                            <constraint firstItem="jFW-bA-TCX" firstAttribute="top" secondItem="jNE-cV-ujq" secondAttribute="bottom" constant="187" id="vih-Ce-gXI"/>
                             <constraint firstItem="C0Z-hb-SK6" firstAttribute="leading" secondItem="ESE-nS-0CP" secondAttribute="leading" constant="16" id="xZk-3k-xHQ"/>
                             <constraint firstItem="Nr8-ba-U5s" firstAttribute="top" secondItem="jFW-bA-TCX" secondAttribute="bottom" constant="128" id="ySU-WF-lGp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ESE-nS-0CP"/>
                     </view>
                     <connections>
+                        <outlet property="cargador" destination="jNE-cV-ujq" id="ix0-JS-zv4"/>
                         <outlet property="genero" destination="SqI-JQ-DD0" id="hTg-IM-riJ"/>
                         <outlet property="juego" destination="Nq2-fb-Vcg" id="FlL-Dk-bdz"/>
                         <outlet property="picker" destination="XbB-oD-KnU" id="kiT-RS-Hvq"/>

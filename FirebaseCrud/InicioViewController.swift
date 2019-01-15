@@ -9,14 +9,17 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
-class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
+class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     @IBOutlet weak var juego: UITextField!
     @IBOutlet weak var genero: UITextField!
     @IBOutlet weak var vistePicker: UILabel!
     @IBOutlet weak var picker: UIPickerView!
+    @IBOutlet weak var cargador: UIActivityIndicatorView!
     
+    var imagen = UIImage()
     var plataforma : String = ""
     let plataformas = ["PLAYSTATION 4","XBOX ONE","NINTENDO SWITCH","PC"]
     
@@ -33,6 +36,7 @@ class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         
         //se esta referenciando a la BBDD de firebase
         ref = Database.database().reference()
+        cargador.isHidden = true
         
     }
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -54,15 +58,59 @@ class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     {
         let id = ref.childByAutoId().key
         
+        let storage = Storage.storage().reference()
+        let nombreImagen = UUID()
+        let directorio = storage.child("imagenes/\(nombreImagen)")
+        let metaData = StorageMetadata()
+        
+        metaData.contentType = "image/png"
+        directorio.putData(imagen.pngData()!, metadata: metaData) { (data, error) in
+            if error == nil{
+                print("cargo la imagen")
+                self.cargador.stopAnimating()
+                self.cargador.isHidden = true
+            }
+            else{
+                if let error = error?.localizedDescription{
+                    print("error al subir imagen en Firebase ", error)
+                }else{
+                    print("error en el codigo")
+                }
+            }
+        }
+        
         let campos = ["nombre" : juego.text!,
                       "genero" : genero.text!,
-                      "id": id]
+                      "id": id,
+                      "portada": String(describing: directorio)]
         
         ref.child(plataforma).child(id!).setValue(campos)
+        cargador.isHidden = false
+        cargador.startAnimating()
         print("guardo")
-        
         limpiar()
         
+    }
+    
+    @IBAction func tomarFoto(_ sender: UIBarButtonItem)
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        let imagenTomada = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        imagen = imagenTomada
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController)
+    {
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func salir(_ sender: UIButton)
@@ -75,5 +123,5 @@ class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     {
         juego.text = ""
         genero.text = ""
-    }    
+    }
 }
