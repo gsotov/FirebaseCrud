@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseStorage
 
 class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
@@ -43,13 +44,45 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tabla.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tabla.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! Celda
         let juego : Juegos
         
         juego = listaJuegos[indexPath.row]
+        cell.nombreFirebase.text = juego.nombre
+        cell.generoFirebase.text = juego.genero
+        
+        if let urlFoto = juego.imagen{
+            Storage.storage().reference(forURL: urlFoto).getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+                if let error = error?.localizedDescription{
+                    print("fallo al traer imagenes", error  )
+                }else{
+                    cell.imagenFirebase.image = UIImage(data: data!)
+                    cell.imagenFirebase.layer.masksToBounds = false
+                    cell.imagenFirebase.layer.cornerRadius = cell.imagenFirebase.frame.height/2
+                    cell.imagenFirebase.clipsToBounds = true
+                    cell.imagenFirebase.layer.borderWidth = 2
+                    self.tabla.reloadData()
+                }
+                
+            }
+        }
+        
+        /*
         cell.textLabel?.text = juego.nombre
         cell.detailTextLabel?.text = juego.genero
         
+        if let urlFoto = juego.imagen{
+            Storage.storage().reference(forURL: urlFoto).getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+                if let error = error?.localizedDescription{
+                    print("fallo al traer imagenes", error  )
+                }else{
+                    cell.imageView?.image = UIImage(data: data!)
+                    self.tabla.reloadData()
+                }
+                
+            }
+        }
+        */
         return cell
     }
     
@@ -65,9 +98,10 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 let nombre = valores["nombre"] as? String
                 let genero = valores["genero"] as? String
                 let id = valores["id"] as? String
+                let url = valores["portada"] as? String
                 
                 
-                let juegos = Juegos(nombre: nombre, genero: genero, id: id)
+                let juegos = Juegos(nombre: nombre, genero: genero, id: id, imagen: url)
                 self.listaJuegos.append(juegos)
                 
             }
