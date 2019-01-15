@@ -24,6 +24,7 @@ class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     let plataformas = ["PLAYSTATION 4","XBOX ONE","NINTENDO SWITCH","PC"]
     
     var ref: DatabaseReference!
+    var idFirebase = ""
     
     override func viewDidLoad()
     {
@@ -32,6 +33,9 @@ class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         picker.dataSource = self
         
         let correo = Auth.auth().currentUser?.email
+        idFirebase = (Auth.auth().currentUser?.uid)!
+        print(idFirebase)
+        
         print("el correo electronico es: \(correo!)")
         
         //se esta referenciando a la BBDD de firebase
@@ -84,7 +88,7 @@ class InicioViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                       "id": id,
                       "portada": String(describing: directorio)]
         
-        ref.child(plataforma).child(id!).setValue(campos)
+        ref.child(idFirebase).child(plataforma).child(id!).setValue(campos)
         cargador.isHidden = false
         cargador.startAnimating()
         print("guardo")

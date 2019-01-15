@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 
 class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
@@ -20,6 +21,7 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var ref: DatabaseReference!
     var handle: DatabaseHandle!
     var consola = ""
+    var idFirebase = ""
     
     override func viewDidLoad()
     {
@@ -52,7 +54,7 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.generoFirebase.text = juego.genero
         
         if let urlFoto = juego.imagen{
-            Storage.storage().reference(forURL: urlFoto).getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+            Storage.storage().reference(forURL: urlFoto).getData(maxSize: 1 * 1024 * 1024) { (data, error) in
                 if let error = error?.localizedDescription{
                     print("fallo al traer imagenes", error  )
                 }else{
@@ -88,7 +90,10 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func plataformas(plat: String)
     {
-        handle = ref.child(plat).observe(DataEventType.value, with: { (snapshot) in
+        guard let idFirebase = Auth.auth().currentUser?.uid else {
+            return
+        }
+        handle = ref.child(idFirebase).child(plat).observe(DataEventType.value, with: { (snapshot) in
             self.listaJuegos.removeAll()
             
             for item in snapshot.children.allObjects as! [DataSnapshot]
@@ -133,8 +138,12 @@ class VistaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let juego: Juegos
             juego = self.listaJuegos[indexPath.row]
             let id = juego.id
+            let url = juego.imagen
+            let idFirebase = (Auth.auth().currentUser?.uid)!
+            self.ref.child(idFirebase).child(self.consola).child(id!).setValue(nil)
             
-            self.ref.child(self.consola).child(id!).setValue(nil)
+            let borrarImagen = Storage.storage().reference(forURL: url!)
+            borrarImagen.delete(completion: nil)
         }
         return [borrar]
     }
